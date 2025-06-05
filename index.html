@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendas 2024 vs 2025</title>
+    <title>Sales 2024 vs 2025</title>
     <style>
         * {
             margin: 0;
@@ -111,6 +111,13 @@
             z-index: 1;
         }
 
+        .chart-header .subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+
         .chart-content {
             padding: 30px;
         }
@@ -131,6 +138,7 @@
         .chart-item:nth-child(5) { animation-delay: 0.5s; }
         .chart-item:nth-child(6) { animation-delay: 0.6s; }
         .chart-item:nth-child(7) { animation-delay: 0.7s; }
+        .chart-item:nth-child(8) { animation-delay: 0.8s; }
 
         @keyframes fadeInSlide {
             from {
@@ -213,19 +221,21 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Barras 2025 */
+        /* 2025 Bars - Updated values with new max of $70,301 */
         .bar-2025-1 { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); width: 100%; }
-        .bar-2025-2 { background: linear-gradient(135deg, #2980b9 0%, #3498db 100%); width: 75.4%; }
-        .bar-2025-3 { background: linear-gradient(135deg, #3498db 0%, #5dade2 100%); width: 74.1%; }
-        .bar-2025-4 { background: linear-gradient(135deg, #5dade2 0%, #85c1e9 100%); width: 44.1%; }
-        .bar-2025-5 { background: linear-gradient(135deg, #85c1e9 0%, #aed6f1 100%); width: 14.9%; }
+        .bar-2025-2 { background: linear-gradient(135deg, #2980b9 0%, #3498db 100%); width: 83.6%; }
+        .bar-2025-3 { background: linear-gradient(135deg, #3498db 0%, #5dade2 100%); width: 75.4%; }
+        .bar-2025-4 { background: linear-gradient(135deg, #5dade2 0%, #85c1e9 100%); width: 74.0%; }
+        .bar-2025-5 { background: linear-gradient(135deg, #85c1e9 0%, #aed6f1 100%); width: 44.1%; }
+        .bar-2025-6 { background: linear-gradient(135deg, #aed6f1 0%, #d6eaf8 100%); width: 21.3%; }
+        .bar-2025-7 { background: linear-gradient(135deg, #d6eaf8 0%, #ebf5fb 100%); width: 14.9%; }
+        .bar-2025-8 { background: linear-gradient(135deg, #ebf5fb 0%, #f8fbfe 100%); width: 7.4%; }
 
-        /* Barras 2024 */
+        /* 2024 Bars - Removed Martech, new max is $119,100 */
         .bar-2024-1 { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); width: 100%; }
         .bar-2024-2 { background: linear-gradient(135deg, #2980b9 0%, #3498db 100%); width: 84.4%; }
         .bar-2024-3 { background: linear-gradient(135deg, #3498db 0%, #5dade2 100%); width: 49.6%; }
-        .bar-2024-4 { background: linear-gradient(135deg, #5dade2 0%, #85c1e9 100%); width: 47.8%; }
-        .bar-2024-5 { background: linear-gradient(135deg, #85c1e9 0%, #aed6f1 100%); width: 4.4%; }
+        .bar-2024-4 { background: linear-gradient(135deg, #5dade2 0%, #85c1e9 100%); width: 47.7%; }
 
         .value-label {
             position: absolute;
@@ -341,16 +351,16 @@
 <body>
     <div class="main-container">
         <div class="main-header">
-            <h1>Análise de Vendas Comparativa</h1>
-            <p>Performance 2024 vs 2025 - Estudo Total de Vendas</p>
+            <h1>Sales Comparative Analysis</h1>
+            <p>Performance 2024 vs 2025 - Total Sales Study</p>
         </div>
 
         <div class="charts-grid">
-            <!-- Gráfico 2025 -->
+            <!-- 2025 Chart -->
             <div class="chart-container">
                 <div class="chart-header year-2025">
                     <div class="year">2025</div>
-                    <h2>Vendas Projetadas</h2>
+                    <h2>IPL Sales per Report Q1 & Q2</h2>
                 </div>
                 
                 <div class="chart-content">
@@ -358,7 +368,16 @@
                         <div class="company-label">SAP</div>
                         <div class="bar-container">
                             <div class="bar bar-2025-1">
-                                <div class="value-label">$70,301</div>
+                                <div class="value-label">$70,301 USD</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">Custom Research</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2025-2">
+                                <div class="value-label">$58,800 USD</div>
                             </div>
                         </div>
                     </div>
@@ -366,8 +385,8 @@
                     <div class="chart-item">
                         <div class="company-label">Microsoft</div>
                         <div class="bar-container">
-                            <div class="bar bar-2025-2">
-                                <div class="value-label">$53,000</div>
+                            <div class="bar bar-2025-3">
+                                <div class="value-label">$53,000 USD</div>
                             </div>
                         </div>
                     </div>
@@ -375,8 +394,8 @@
                     <div class="chart-item">
                         <div class="company-label">DBSS</div>
                         <div class="bar-container">
-                            <div class="bar bar-2025-3">
-                                <div class="value-label">$52,000</div>
+                            <div class="bar bar-2025-4">
+                                <div class="value-label">$52,000 USD</div>
                             </div>
                         </div>
                     </div>
@@ -384,8 +403,17 @@
                     <div class="chart-item">
                         <div class="company-label">ServiceNow</div>
                         <div class="bar-container">
-                            <div class="bar bar-2025-4">
-                                <div class="value-label">$31,000</div>
+                            <div class="bar bar-2025-5">
+                                <div class="value-label">$31,000 USD</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">PHDC</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2025-6">
+                                <div class="value-label">$15,000 USD</div>
                             </div>
                         </div>
                     </div>
@@ -393,8 +421,17 @@
                     <div class="chart-item">
                         <div class="company-label">Salesforce</div>
                         <div class="bar-container">
-                            <div class="bar bar-2025-5">
-                                <div class="value-label">$10,500</div>
+                            <div class="bar bar-2025-7">
+                                <div class="value-label">$10,500 USD</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">Martech</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2025-8">
+                                <div class="value-label">$5,224 USD</div>
                             </div>
                         </div>
                     </div>
@@ -402,21 +439,22 @@
                 
                 <div class="chart-stats">
                     <div class="stat-item">
-                        <div class="stat-value">$216,801</div>
+                        <div class="stat-value">$295,825 USD</div>
                         <div class="stat-label">Total</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value">$43,360</div>
-                        <div class="stat-label">Média</div>
+                        <div class="stat-value">$36,978 USD</div>
+                        <div class="stat-label">Average</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Gráfico 2024 -->
+            <!-- 2024 Chart -->
             <div class="chart-container">
                 <div class="chart-header year-2024">
                     <div class="year">2024</div>
-                    <h2>Vendas Realizadas</h2>
+                    <h2>IPL Sales Reports Q4</h2>
+                    <div class="subtitle">Sales by reports 2024</div>
                 </div>
                 
                 <div class="chart-content">
@@ -424,7 +462,7 @@
                         <div class="company-label">Gen AI</div>
                         <div class="bar-container">
                             <div class="bar bar-2024-1">
-                                <div class="value-label">$119,100</div>
+                                <div class="value-label">$119,100 USD</div>
                             </div>
                         </div>
                     </div>
@@ -433,7 +471,7 @@
                         <div class="company-label">Analytics</div>
                         <div class="bar-container">
                             <div class="bar bar-2024-2">
-                                <div class="value-label">$100,500</div>
+                                <div class="value-label">$100,500 USD</div>
                             </div>
                         </div>
                     </div>
@@ -442,7 +480,7 @@
                         <div class="company-label">MultiCloud</div>
                         <div class="bar-container">
                             <div class="bar bar-2024-3">
-                                <div class="value-label">$59,100</div>
+                                <div class="value-label">$59,100 USD</div>
                             </div>
                         </div>
                     </div>
@@ -451,16 +489,7 @@
                         <div class="company-label">Oracle</div>
                         <div class="bar-container">
                             <div class="bar bar-2024-4">
-                                <div class="value-label">$56,820</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-item">
-                        <div class="company-label">Martech</div>
-                        <div class="bar-container">
-                            <div class="bar bar-2024-5">
-                                <div class="value-label">$5,224</div>
+                                <div class="value-label">$56,820 USD</div>
                             </div>
                         </div>
                     </div>
@@ -468,31 +497,31 @@
                 
                 <div class="chart-stats">
                     <div class="stat-item">
-                        <div class="stat-value">$340,744</div>
+                        <div class="stat-value">$335,520 USD</div>
                         <div class="stat-label">Total</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value">$68,149</div>
-                        <div class="stat-label">Média</div>
+                        <div class="stat-value">$83,880 USD</div>
+                        <div class="stat-label">Average</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="comparison-section">
-            <h3>Comparativo Geral</h3>
+            <h3>General Comparison</h3>
             <div class="comparison-stats">
                 <div class="comparison-item">
                     <h4>Total 2024</h4>
-                    <div class="comparison-value">$340,744</div>
+                    <div class="comparison-value">$335,520 USD</div>
                 </div>
                 <div class="comparison-item">
                     <h4>Total 2025</h4>
-                    <div class="comparison-value">$216,801</div>
+                    <div class="comparison-value">$295,825 USD</div>
                 </div>
                 <div class="comparison-item">
-                    <h4>Variação</h4>
-                    <div class="comparison-value">-36.4%</div>
+                    <h4>Variation</h4>
+                    <div class="comparison-value">-11.8%</div>
                 </div>
             </div>
         </div>
