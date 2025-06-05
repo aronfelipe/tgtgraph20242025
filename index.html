@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas 2024 vs 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .main-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .main-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-header p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .chart-header {
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-header.year-2025 {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .chart-header.year-2024 {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+
+        .chart-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: sweep 3s infinite;
+        }
+
+        @keyframes sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .chart-header h2 {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chart-header .year {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chart-content {
+            padding: 30px;
+        }
+
+        .chart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            position: relative;
+            opacity: 0;
+            animation: fadeInSlide 0.8s ease-out forwards;
+        }
+
+        .chart-item:nth-child(1) { animation-delay: 0.1s; }
+        .chart-item:nth-child(2) { animation-delay: 0.2s; }
+        .chart-item:nth-child(3) { animation-delay: 0.3s; }
+        .chart-item:nth-child(4) { animation-delay: 0.4s; }
+        .chart-item:nth-child(5) { animation-delay: 0.5s; }
+        .chart-item:nth-child(6) { animation-delay: 0.6s; }
+        .chart-item:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .company-label {
+            width: 120px;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 12px;
+            margin-right: 15px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .company-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(44, 62, 80, 0.4);
+        }
+
+        .bar-container {
+            flex: 1;
+            position: relative;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .bar {
+            height: 100%;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s ease;
+            animation: expandBar 1.5s ease-out forwards;
+            transform-origin: left;
+        }
+
+        @keyframes expandBar {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.2) 75%);
+            background-size: 15px 15px;
+            animation: shimmer 2s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-15px); }
+            100% { transform: translateX(15px); }
+        }
+
+        .bar:hover {
+            transform: scaleY(1.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Barras 2025 */
+        .bar-2025-1 { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); width: 100%; }
+        .bar-2025-2 { background: linear-gradient(135deg, #2980b9 0%, #3498db 100%); width: 75.4%; }
+        .bar-2025-3 { background: linear-gradient(135deg, #3498db 0%, #5dade2 100%); width: 74.1%; }
+        .bar-2025-4 { background: linear-gradient(135deg, #5dade2 0%, #85c1e9 100%); width: 44.1%; }
+        .bar-2025-5 { background: linear-gradient(135deg, #85c1e9 0%, #aed6f1 100%); width: 14.9%; }
+
+        /* Barras 2024 */
+        .bar-2024-1 { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); width: 100%; }
+        .bar-2024-2 { background: linear-gradient(135deg, #2980b9 0%, #3498db 100%); width: 84.4%; }
+        .bar-2024-3 { background: linear-gradient(135deg, #3498db 0%, #5dade2 100%); width: 49.6%; }
+        .bar-2024-4 { background: linear-gradient(135deg, #5dade2 0%, #85c1e9 100%); width: 47.8%; }
+        .bar-2024-5 { background: linear-gradient(135deg, #85c1e9 0%, #aed6f1 100%); width: 4.4%; }
+
+        .value-label {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: 700;
+            font-size: 13px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .chart-stats {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #5dade2;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .comparison-section h3 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .comparison-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .comparison-item {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .comparison-item h4 {
+            color: #3498db;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .comparison-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        @media (max-width: 1024px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .comparison-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 20px 10px;
+            }
+            
+            .chart-content {
+                padding: 20px;
+            }
+            
+            .company-label {
+                width: 90px;
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+            
+            .value-label {
+                font-size: 11px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="main-header">
+            <h1>Análise de Vendas Comparativa</h1>
+            <p>Performance 2024 vs 2025 - Estudo Total de Vendas</p>
+        </div>
+
+        <div class="charts-grid">
+            <!-- Gráfico 2025 -->
+            <div class="chart-container">
+                <div class="chart-header year-2025">
+                    <div class="year">2025</div>
+                    <h2>Vendas Projetadas</h2>
+                </div>
+                
+                <div class="chart-content">
+                    <div class="chart-item">
+                        <div class="company-label">SAP</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2025-1">
+                                <div class="value-label">$70,301</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">Microsoft</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2025-2">
+                                <div class="value-label">$53,000</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">DBSS</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2025-3">
+                                <div class="value-label">$52,000</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">ServiceNow</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2025-4">
+                                <div class="value-label">$31,000</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">Salesforce</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2025-5">
+                                <div class="value-label">$10,500</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">$216,801</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$43,360</div>
+                        <div class="stat-label">Média</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico 2024 -->
+            <div class="chart-container">
+                <div class="chart-header year-2024">
+                    <div class="year">2024</div>
+                    <h2>Vendas Realizadas</h2>
+                </div>
+                
+                <div class="chart-content">
+                    <div class="chart-item">
+                        <div class="company-label">Gen AI</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2024-1">
+                                <div class="value-label">$119,100</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">Analytics</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2024-2">
+                                <div class="value-label">$100,500</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">MultiCloud</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2024-3">
+                                <div class="value-label">$59,100</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">Oracle</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2024-4">
+                                <div class="value-label">$56,820</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-item">
+                        <div class="company-label">Martech</div>
+                        <div class="bar-container">
+                            <div class="bar bar-2024-5">
+                                <div class="value-label">$5,224</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">$340,744</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$68,149</div>
+                        <div class="stat-label">Média</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-section">
+            <h3>Comparativo Geral</h3>
+            <div class="comparison-stats">
+                <div class="comparison-item">
+                    <h4>Total 2024</h4>
+                    <div class="comparison-value">$340,744</div>
+                </div>
+                <div class="comparison-item">
+                    <h4>Total 2025</h4>
+                    <div class="comparison-value">$216,801</div>
+                </div>
+                <div class="comparison-item">
+                    <h4>Variação</h4>
+                    <div class="comparison-value">-36.4%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
